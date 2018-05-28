@@ -52,8 +52,15 @@ def grapher(datasets):
     """ Uses matplotlib to graph the times of the algorithms
     """ 
     
-    data_out = validity_test(datasets, False)
-    return data_out
+    data = validity_test(datasets, False)
+    doubleplot = []
+
+    for i in data:
+        for j in i[1] 
+        doubpleplot.append[j[1]]
+    
+    print(doubpleplot)
+    return data
     
 
 
@@ -74,8 +81,7 @@ def main():
         validity_test(dataset)
     elif sel == "2":
         print("\tWarning: Graph generation may take some time\n")
-        output = grapher(dataset)
-        print(output)
+        grapher(dataset)
     else:
         print("\tWarning: Graph generation may take some time\n")
         validity_test(dataset)
