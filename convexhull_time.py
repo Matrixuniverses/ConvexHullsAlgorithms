@@ -24,21 +24,29 @@ def validity_test(datasets, run_print=True):
     verify_raw.close()
     verify_lines = [x.strip() for x in verify_lines]
 
+    # Formatting the output
     title_string = "=" * 50 + "\nDataset\t\tExpected output?\tTime taken\n" + "=" * 50
     if run_print: print(title_string)
 
-    for algorithm in [cvh.grahamscan, cvh.giftwrap]:
+    # Running the output and validating 
+    for algorithm in [cvh.grahamscan, cvh.amethod, cvh.giftwrap]:
         alg_out = [algorithm.__name__, []]
-        if run_print: print('Algorithm: {0}'.format(algorithm.__name__))
+        if run_print: 
+            if algorithm.__name__ == "amethod": algorithm.__name__ = "monotone chain"
+            print('Algorithm: {0}'.format(algorithm.__name__))
          
         for index, dataset in enumerate(datasets):
-            exp_out = verify_lines[index]
+            exp_out = eval(verify_lines[index])
             start = time.time()
-            act_out = str(algorithm(cvh.readDataPts('Sets/' + dataset + '.dat', int(dataset[2:]))))
+            act_out = algorithm(cvh.readDataPts('Sets/' + dataset + '.dat', int(dataset[2:])))
 
             # Only print to stout if the textual option is selected 
             if run_print:
-                print('{0}\t\t{1}'.format(dataset, exp_out == act_out), end='')
+                # If the 3rd algorithm is running ignore the order of the convexhull
+                if algorithm.__name__ == "monotone chain":
+                    print('{0}\t\t{1}'.format(dataset, set(exp_out) == set(act_out)), end='')
+                else:
+                    print('{0}\t\t{1}'.format(dataset, exp_out == act_out), end='')
                 print('\t\t\t{0:.4f} ms'.format((time.time() - start) * 1e3))
             alg_out[1].append((dataset, time.time() - start))
 

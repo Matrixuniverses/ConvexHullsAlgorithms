@@ -179,9 +179,27 @@ def amethod(listPts):
         the monochain algorithm
     """
     
+    # Initializing variables for the upper and lower hulls
+    upper_hull, lower_hull = [], []
     
+    # Sorting the points by x co-ordinate
+    x_sorted = sorted(listPts, key = lambda x: x[0])
+
+    # Performing the upper iteration of the algorithm
+    for point in x_sorted:
+        while len(lower_hull) >= 2 and not isCCW(lower_hull[-2], lower_hull[-1], point):
+            lower_hull.pop()
+        lower_hull.append(point)
     
-    #return chull
+    # Performing the lower iteration of the algorithm
+    for point in reversed(x_sorted):
+        while len(upper_hull) >= 2 and not isCCW(upper_hull[-2], upper_hull[-1], point):
+            upper_hull.pop()
+        upper_hull.append(point)
+
+    # Returning the upper and lower hull concatonated together, minus the final point 
+    # as it is a duplication
+    return lower_hull[:-1] + upper_hull[:-1]
 
 
 def main():
@@ -189,9 +207,11 @@ def main():
         used as the testing suite will call the required methods
     """
 
-    print('Giftwrap: ' + giftwrap(readDataPts('A_3000.dat', 3000)))
-    print('Grahamscan: ' + grahamscan(readDataPts('A_6000.dat', 6000)))
-    print('Monotone chain: ' + grahamscan(readDataPts('B_9000.dat', 9000)))
+    #print('Giftwrap: ' + giftwrap(readDataPts('A_3000.dat', 3000)))
+    #print('Grahamscan: ' + grahamscan(readDataPts('A_6000.dat', 6000)))
+    #print('Monotone chain: {0}'.format(amethod(readDataPts('Sets/A_3000.dat', 3000))))
+
+    amethod(readDataPts('Sets/A_3000.dat', 3000))
 
 
 if __name__ == "__main__":
