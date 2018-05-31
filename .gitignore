@@ -109,3 +109,4 @@ venv.bak/
 # PDFS do not need to be included
 *.pdf
 *.zip
+*.docx
