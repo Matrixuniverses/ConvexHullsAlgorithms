@@ -10,3 +10,5 @@ All of the algorithms are called from the testing suite to generate graphs and v
 Run by excecuting `python3 convexhull_time.py`
 
 **Warning:** Generating graphs may take time when choosing the graphical method 
+
+**Warning:** Datasets must be in './Sets/' otherwise the testing function will break, included is a zipfile containing the testing methods and the correct data-structure 
