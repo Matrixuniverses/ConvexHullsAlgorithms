@@ -65,6 +65,7 @@ def theta(point_1, point_2):
     elif t == 0:
         return 360
 
+    # Converting the t values into degree values
     return t * 90
 
 
@@ -73,6 +74,7 @@ def min_y(listPts):
         of the given point list
     """
 
+    # Defining the initial minimum values
     min_y = float('inf')
     min_point = None
 
@@ -97,7 +99,8 @@ def min_y(listPts):
 def isCCW(point_a, point_b, point_c):
     """ Returns true if the supplied points are counter-clockwise
     """
-    
+   
+    # Returns a boolean value for checking if 3 points are counter-clockwise
     return ((point_b[0] - point_a[0]) * (point_c[1] - point_a[1]) - 
             (point_b[1] - point_a[1]) * (point_c[0] - point_a[0])) > 0 
 
@@ -173,14 +176,23 @@ def grahamscan(listPts):
 
 def amethod(listPts):
     """ Returns the convex hull vertices computed using 
-        a third algorithm
+        the monochain algorithm
     """
-    #Your implementation goes here    
+    
+    
+    
     #return chull
 
 
 def main():
-    result = grahamscan(readDataPts('Sets/B_9000.dat', 9000)) 
+    """ Prints the convex hulls of the given dataset, this method is not generally 
+        used as the testing suite will call the required methods
+    """
+
+    print('Giftwrap: ' + giftwrap(readDataPts('A_3000.dat', 3000)))
+    print('Grahamscan: ' + grahamscan(readDataPts('A_6000.dat', 6000)))
+    print('Monotone chain: ' + grahamscan(readDataPts('B_9000.dat', 9000)))
+
 
 if __name__ == "__main__":
     main()
