@@ -1,7 +1,5 @@
 """
-   Convex Hull Assignment: COSC262 (2018)
-   Student Name: Sam Shanand
-   Usercode: sjs227
+   Author: Matrixuniverses
 """
 
 
